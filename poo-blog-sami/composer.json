@@ -1,0 +1,15 @@
+{
+    "name": "samie/poo-blog-sami",
+    "autoload": {
+        "psr-4": {
+            "Samie\\PooBlogSami\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "sam22i",
+            "email": "sami.elakkari@gmail.com"
+        }
+    ],
+    "require": {}
+}
