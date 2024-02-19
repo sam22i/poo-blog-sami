@@ -1,14 +1,10 @@
 <?php
 
-require_once('libraries/database.php');
+require_once('libraries/models/Model.php');
 
-class Article 
+class Article extends Model
 {
-  private $pdo;
-  public function __construct()
-  {
-    $this->pdo = getPdo();
-  }
+  
 
  /**
  * retourne la liste des articles classés par date de parution
@@ -27,9 +23,9 @@ public function findAll(): array{
 
 public function find(int $id, ) : array{
 
-    $pdo = getPdo();
+   
 
-    $query = $pdo->prepare("SELECT * FROM articles WHERE id = :article_id");
+    $query = $this->pdo->prepare("SELECT * FROM articles WHERE id = :article_id");
 
     // On exécute la requête en précisant le paramètre :article_id 
     $query->execute(['article_id' => $id]);
@@ -42,8 +38,8 @@ public function find(int $id, ) : array{
 }
 
 public function delete(int $id) {
-    $pdo = getPdo();
-    $query = $pdo->prepare('DELETE FROM articles WHERE id = :id');
+   
+    $query = $this->pdo->prepare('DELETE FROM articles WHERE id = :id');
     $query->execute(['id' => $id]);
 
 }
