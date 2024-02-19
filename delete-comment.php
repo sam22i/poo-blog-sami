@@ -8,6 +8,8 @@
  */
 require_once('libraries/database.php');
 require_once('libraries/utils.php');
+require_once('libraries/models/Comment.php');
+$model =new Comment();
 /**
  * 1. Récupération du paramètre "id" en GET
  */
@@ -26,13 +28,13 @@ $id = $_GET['id'];
  * 
  * PS : Vous remarquez que ce sont les mêmes lignes que pour l'index.php ?!
  */
-$pdo = getPdo();
+//$pdo = getPdo();
 /**
  * 3. Vérification de l'existence du commentaire
  */
 // $query = $pdo->prepare('SELECT * FROM comments WHERE id = :id');
 // $query->execute(['id' => $id]);
-$commentaire = findComment($id);
+$commentaire = $model->find($id);
 if (!$comment) {
     die("Aucun commentaire n'a l'identifiant $id !");
 }
@@ -47,7 +49,7 @@ $article_id = $commentaire['article_id'];
 
 // $query = $pdo->prepare('DELETE FROM comments WHERE id = :id');
 // $query->execute(['id' => $id]);
-deleteComment($id);
+$model->delete($id);
 
 /**
  * 5. Redirection vers l'article en question

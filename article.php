@@ -10,8 +10,13 @@
  * 
  * On va ensuite afficher l'article puis ses commentaires
  */
+
 require_once('libraries/database.php');
 require_once('libraries/utils.php');
+require_once('libraries/models/Article.php');
+require_once('libraries/models/Comment.php');
+$articleModel = new Article();
+$commentModel = new Comment();
 /**
  * 1. Récupération du param "id" et vérification de celui-ci
  */
@@ -51,7 +56,7 @@ if (!$article_id) {
 // $query->execute(['article_id' => $article_id]);
 // On fouille le résultat pour en extraire les données réelles de l'article
 // $article = $query->fetch();
-$article = findArticle($article_id);
+$article = $articleModel->find($article_id);
 
 /**
  * 4. Récupération des commentaires de l'article en question
@@ -60,7 +65,7 @@ $article = findArticle($article_id);
 // $query = $pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id");
 // $query->execute(['article_id' => $article_id]);
 // $commentaires = $query->fetchAll();
-$commentaires = findAllComments($article_id);
+$commentaires = $commentModel->findAllwithArticle($article_id);
 
 /**
  * 5. On affiche 

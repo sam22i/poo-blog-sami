@@ -25,7 +25,7 @@ require_once('libraries/models/Article.php');
 // On fouille le résultat pour en extraire les données réelles
 
 $model = new Article();
-$articles = $model-> findAllArticles();
+$articles = $model-> findAll();
 
 /**
  * 3. Affichage
